@@ -1,8 +1,8 @@
 // =================================================================
 //
 // File: list.h
-// Author:
-// Date:
+// Author: Ricardo Navarro - A01708825
+// Date: 27/09/2022
 // 
 // =================================================================
 #ifndef LIST_H
@@ -224,7 +224,15 @@ T List<T>::last() const {
 template <class T>
 T List<T>::get(uint index) const {
 	T aux;
+	Node<T> *p;
 
+	p = head;
+	for (int i = 0; i < index, i++){
+		p = p->next;
+	}
+
+	aux = p->value;
+	
 	// TO DO
 	return aux;
 }
@@ -275,7 +283,26 @@ void List<T>::push_back(T val) {
 // =================================================================
 template <class T>
 void List<T>::insert_at(T val, uint index) {
-	// TO DO
+	Node<T> *p, *q;
+
+	if (empty() || index == 0) {
+		push_front(val);
+		return;
+	}
+	else if (index == size){
+		push_back(val);
+		return;
+	}
+
+	p = head;
+	for (int i = 0; i < index; i++){
+		p = p->next;
+	}
+
+	q = new Node<T>(val);
+	q->next = p->next;
+	p->next = q;
+	size++;
 }
 
 // =================================================================
@@ -360,6 +387,19 @@ T List<T>::remove_at(uint index) {
 template <class T>
 long int List<T>::indexOf(T val) const {
 	// TO DO
+	Node<T> *p;
+	long int count = 0;
+
+	p = head;
+	while (p->next != NULL){
+		if (p->value == val){
+			return count;
+		} 
+		
+		p = p->next;
+		count = 0;
+	}
+
 	return -1;
 }
 
