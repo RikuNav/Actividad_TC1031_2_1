@@ -220,6 +220,12 @@ T List<T>::last() const {
 //
 // @returns the element in index
 // @throws IndexOutOfBounds, if index >= size.
+//
+// Complexity: O(n)
+// At the moment we do the analysis of the complexity of the
+// algotirhm, we can see that the worst scenario has on it only
+// a for loop, in which we know that his complexity is the one that
+// we already mentioned
 // =================================================================
 template <class T>
 T List<T>::get(uint index) const {
@@ -286,6 +292,12 @@ void List<T>::push_back(T val) {
 // was in that position is shifted to the right.
 //
 // @throws IndexOutOfBounds, if index > size.
+//
+// Complexity: O(n)
+// At the moment we do the analysis of the complexity of the
+// algotirhm, we can see that the worst scenario has on it only
+// a for loop, in which we know that his complexity is the one that
+// we already mentioned
 // =================================================================
 template <class T>
 void List<T>::insert_at(T val, uint index) {
@@ -383,6 +395,12 @@ T List<T>::pop_back() {
 //
 // @returns the element that was in index.
 // @throws IndexOutOfBounds, if index >= size.
+//
+// Complexity: O(n)
+// At the moment we do the analysis of the complexity of the
+// algotirhm, we can see that the worst scenario has on it only
+// a for loop, in which we know that his complexity is the one that
+// we already mentioned
 // =================================================================
 template <class T>
 T List<T>::remove_at(uint index) {
@@ -430,6 +448,12 @@ T List<T>::remove_at(uint index) {
 //
 // @returns the position of an item in the list, -1 otherwise.
 // @throws IndexOutOfBounds, if index >= size.
+//
+// Complexity: O(n)
+// At the moment we do the analysis of the complexity of the
+// algotirhm, we can see that the worst scenario has on it only
+// a for loop, in which we know that his complexity is the one that
+// we already mentioned
 // =================================================================
 template <class T>
 long int List<T>::indexOf(T val) const {
