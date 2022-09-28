@@ -226,15 +226,21 @@ T List<T>::get(uint index) const {
 	T aux;
 	Node<T> *p;
 
-	p = head;
-	for (int i = 0; i < index, i++){
-		p = p->next;
+	if (index <= size - 1 && index >= 0){
+		p = head;
+		for (int i = 0; i < index; i++){
+			p = p->next;
+		}
+
+		aux = p->value;
+		
+		// TO DO
+		return aux;
+	}
+	else{
+		throw IndexOutOfBounds();	
 	}
 
-	aux = p->value;
-	
-	// TO DO
-	return aux;
 }
 
 // =================================================================
@@ -285,24 +291,31 @@ template <class T>
 void List<T>::insert_at(T val, uint index) {
 	Node<T> *p, *q;
 
-	if (empty() || index == 0) {
-		push_front(val);
-		return;
+
+	if (index <= size && index >= 0){
+		if (empty() || index == 0) {
+			push_front(val);
+			return;
+		}
+		else if (index == size){
+			push_back(val);
+			return;
+		}
+
+		p = head;
+		for (int i = 0; i < index - 1; i++){
+			p = p->next;
+		}
+
+		q = new Node<T>(val);
+		q->next = p->next;
+		p->next = q;
+		size++;
 	}
-	else if (index == size){
-		push_back(val);
-		return;
+	else{
+		throw IndexOutOfBounds();
 	}
 
-	p = head;
-	for (int i = 0; i < index; i++){
-		p = p->next;
-	}
-
-	q = new Node<T>(val);
-	q->next = p->next;
-	p->next = q;
-	size++;
 }
 
 // =================================================================
@@ -374,8 +387,42 @@ T List<T>::pop_back() {
 template <class T>
 T List<T>::remove_at(uint index) {
 	T aux;
-	// TO DO
-	return aux;
+	Node<T> *p, *q;
+
+	if (index < size && index >= 0){
+		
+
+		if (index == 0){
+			p = head;
+			aux = p->value;
+			head = head->next;
+			size--;
+
+			delete p;
+			
+			return aux;
+		}
+		else{
+			p = head;
+			for (int i = 0; i < index - 1; i++){
+				p = p->next; 
+			}
+
+			q = p->next;
+			p->next = q->next;
+			aux = q->value;
+			size--;
+			
+			delete q;
+			
+			return aux;
+		}
+		
+	}
+	else{
+		throw IndexOutOfBounds();
+	}
+	
 }
 
 // =================================================================
@@ -388,16 +435,14 @@ template <class T>
 long int List<T>::indexOf(T val) const {
 	// TO DO
 	Node<T> *p;
-	long int count = 0;
 
 	p = head;
-	while (p->next != NULL){
+	for (long int i = 0; i < size; i++){
 		if (p->value == val){
-			return count;
+			return i;
 		} 
 		
 		p = p->next;
-		count = 0;
 	}
 
 	return -1;
